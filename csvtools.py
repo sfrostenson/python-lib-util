@@ -15,13 +15,6 @@ def read(filename):
     return data
 
 
-# this writes output as a csv
-def write(data, filename):
-    with open(filename, 'wb') as f:
-        writer = csv.writer(f)
-        writer.writerows(data)
-
-
 # this opens and reads csv data as a dict
 def read_as_dict(filename):
     csv = read(filename)
@@ -33,6 +26,27 @@ def read_as_dict(filename):
             d[header] = row[index]
         data.append(d)
     return data
+
+
+# this flattens our data from a list of dicts and writes output as csv
+def flatten_dict(data, headers, filename):
+    result = list()
+    for row in data:
+        result_row = list ()
+        for key in headers:
+            result_row.append(row[key])
+        result.append(result_row)
+
+    headers = [headers]
+    result = headers + result
+    write(result, filename)
+
+
+# this writes output as a csv
+def write(data, filename):
+    with open(filename, 'wb') as f:
+        writer = csv.writer(f)
+        writer.writerows(data)
 
 
 # this will sort a dict of list of dictionaries based on a key value.
