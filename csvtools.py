@@ -15,6 +15,17 @@ def read(filename):
     return data
 
 
+# this opens and reads a csv data as a list
+def read_tsv(filename):
+    data = []
+    with open(filename, 'rU') as f:
+        f = csv.reader(f, delimiter='\t')
+        for row in f:
+            data.append(row)
+
+    return data
+
+
 # this opens and reads csv data as a dict
 def read_as_dict(filename):
     csv = read(filename)
