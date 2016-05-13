@@ -39,6 +39,19 @@ def read_as_dict(filename):
     return data
 
 
+# this opens and reads csv data as a dict
+def read_as_dict_tsv(filename):
+    csv = read_tsv(filename)
+    headers = csv.pop(0)
+    data = list()
+    for row in csv:
+        d = dict()
+        for index, header in enumerate(headers):
+            d[header] = row[index]
+        data.append(d)
+    return data
+
+
 # this flattens our data from a list of dicts and writes output as csv
 def flatten_dict(data, headers, filename):
     result = list()
