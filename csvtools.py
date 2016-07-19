@@ -52,6 +52,15 @@ def read_as_dict_tsv(filename):
     return data
 
 
+# smarter way to take a list of dicts and write to csv
+def write_dict(data, filename):
+    with open(filename, 'wb') as f:
+        keys = data[0].keys()
+        dict_writer = csv.DictWriter(f, keys)
+        dict_writer.writeheader()
+        dict_writer.writerows(data)
+
+
 # this flattens our data from a list of dicts and writes output as csv
 def flatten_dict(data, headers, filename):
     result = list()
